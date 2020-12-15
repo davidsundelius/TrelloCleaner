@@ -1,0 +1,21 @@
+service: trello-cleaner
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: prod
+  region: eu-north-1
+  memorySize: 128
+  apiGateway:
+    shouldStartNameWithService: true
+functions:
+  app:
+    handler: app.handler
+    events:
+      - http:
+          path: /
+          method: ANY
+          cors: true
+      - http:
+          path: /{proxy+}
+          method: ANY
+          cors: true
